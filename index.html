@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pro Loco Soverato — Sito istituzionale</title>
+<meta name="description" content="Sito istituzionale dell'Associazione Pro Loco di Soverato. Portale ufficiale in fase di realizzazione.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Pro Loco Soverato — Sito istituzionale">
+<meta property="og:description" content="Sito istituzionale dell'Associazione Pro Loco di Soverato.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+
+<!-- Favicon placeholder (sostituibile) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='48' fill='%23C8341F'/></svg>">
+
+<!-- Fonts: Cormorant Garamond (display serif) + Manrope (sans-serif) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rosso-proloco: #C8341F;
+  --rosso-scuro: #9E2818;
+  --crema: #FAF6F0;
+  --crema-scuro: #F0E8DC;
+  --blu-ionio: #1B3A4B;
+  --blu-profondo: #0F2530;
+  --testo: #2A2520;
+  --testo-soft: #6B5D4F;
+  --linea: rgba(42, 37, 32, 0.12);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background: var(--crema);
+  color: var(--testo);
+  min-height: 100vh;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* Texture grain di fondo */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(42, 37, 32, 0.04) 1px, transparent 0);
+  background-size: 3px 3px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 2rem;
+  opacity: 0;
+  animation: fadeDown 1s ease-out 0.2s forwards;
+}
+
+.brand-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rosso-proloco);
+  font-weight: 500;
+}
+
+.brand-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: var(--rosso-proloco);
+  border-radius: 50%;
+  margin: 0 0.5rem;
+  vertical-align: middle;
+}
+
+.year {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--testo-soft);
+}
+
+/* Main */
+.main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+/* Logo column */
+.logo-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeIn 1.2s ease-out 0.6s forwards;
+}
+
+.logo-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Cerchio decorativo intorno al logo */
+.logo-circle-decoration {
+  position: absolute;
+  inset: -20px;
+  border: 1px solid var(--linea);
+  border-radius: 50%;
+  animation: rotateGently 60s linear infinite;
+}
+
+.logo-circle-decoration::before {
+  content: "★";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--crema);
+  color: var(--rosso-proloco);
+  padding: 0 8px;
+  font-size: 0.8rem;
+}
+
+/* Logo (immagine originale) */
+.logo-svg {
+  width: 85%;
+  height: 85%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+/* Content column */
+.content-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--rosso-proloco);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease-out 0.8s forwards;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: var(--rosso-proloco);
+}
+
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
+  font-weight: 500;
+  line-height: 1.05;
+  color: var(--blu-profondo);
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  animation: fadeUp 1s ease-out 1s forwards;
+}
+
+.title em {
+  font-style: italic;
+  color: var(--rosso-proloco);
+  font-weight: 400;
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--testo-soft);
+  margin-bottom: 2rem;
+  max-width: 480px;
+  opacity: 0;
+  animation: fadeUp 1s ease-out 1.2s forwards;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--testo);
+  margin-bottom: 2.5rem;
+  max-width: 480px;
+  line-height: 1.75;
+  opacity: 0;
+  animation: fadeUp 1s ease-out 1.4s forwards;
+}
+
+/* Divider con onda */
+.wave-divider {
+  width: 100%;
+  height: 24px;
+  margin: 2rem 0;
+  opacity: 0;
+  animation: fadeIn 1s ease-out 1.6s forwards;
+}
+
+.wave-divider svg {
+  width: 100%;
+  height: 100%;
+  color: var(--rosso-proloco);
+  opacity: 0.4;
+}
+
+/* Contatti */
+.contacts {
+  display: grid;
+  gap: 0.85rem;
+  opacity: 0;
+  animation: fadeUp 1s ease-out 1.8s forwards;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+  color: var(--testo);
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.contact-item:hover {
+  color: var(--rosso-proloco);
+  transform: translateX(4px);
+}
+
+.contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--rosso-proloco);
+  color: var(--rosso-proloco);
+  flex-shrink: 0;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.contact-item:hover .contact-icon {
+  background: var(--rosso-proloco);
+  color: var(--crema);
+}
+
+.contact-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding-top: 3rem;
+  margin-top: auto;
+  border-top: 1px solid var(--linea);
+  padding-top: 2rem;
+  opacity: 0;
+  animation: fadeUp 1s ease-out 2s forwards;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.president {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.president-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--testo-soft);
+  font-weight: 500;
+}
+
+.president-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-style: italic;
+  color: var(--blu-profondo);
+}
+
+.president-role {
+  font-size: 0.8rem;
+  color: var(--rosso-proloco);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.location {
+  text-align: right;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  color: var(--testo-soft);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.location strong {
+  display: block;
+  font-style: normal;
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--blu-profondo);
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+}
+
+/* Onde decorative in basso */
+.bg-waves {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.06;
+}
+
+.bg-waves svg {
+  width: 100%;
+  height: 100%;
+  color: var(--blu-ionio);
+}
+
+/* Animazioni */
+@keyframes fadeIn {
+  to { opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes rotateGently {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Responsive: tablet */
+@media (max-width: 900px) {
+  .main {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+
+  .content-column {
+    align-items: center;
+  }
+
+  .eyebrow, .subtitle, .description {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .contacts {
+    align-items: flex-start;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .logo-wrap {
+    max-width: 280px;
+  }
+
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .location {
+    text-align: center;
+  }
+}
+
+/* Responsive: mobile */
+@media (max-width: 600px) {
+  .container {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .header {
+    padding-bottom: 1rem;
+  }
+
+  .brand-mark {
+    font-size: 0.8rem;
+  }
+
+  .year {
+    font-size: 0.9rem;
+  }
+
+  .logo-wrap {
+    max-width: 220px;
+  }
+
+  .title {
+    font-size: 2.25rem;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  .description {
+    font-size: 0.95rem;
+  }
+
+  .contact-item {
+    font-size: 0.9rem;
+  }
+
+  .bg-waves {
+    height: 80px;
+  }
+}
+
+/* Stampa */
+@media print {
+  body::before, .bg-waves { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- Onde decorative di sfondo -->
+<div class="bg-waves" aria-hidden="true">
+  <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+    <path d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z" fill="currentColor"/>
+    <path d="M0,80 C200,40 400,100 600,80 C800,60 1000,100 1200,80 L1200,120 L0,120 Z" fill="currentColor" opacity="0.5"/>
+  </svg>
+</div>
+
+<div class="container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="brand-mark">
+      Associazione Turistica
+    </div>
+    <div class="year">MMXXVI</div>
+  </header>
+
+  <!-- Main content -->
+  <main class="main">
+
+    <!-- Logo column -->
+    <div class="logo-column">
+      <div class="logo-wrap">
+        <div class="logo-circle-decoration"></div>
+
+        <!-- Logo Pro Loco Soverato (file originale) -->
+        <img class="logo-svg" src="logo.png" alt="Logo Pro Loco Soverato">
+
+      </div>
+    </div>
+
+    <!-- Content column -->
+    <div class="content-column">
+
+      <div class="eyebrow">Portale ufficiale in fase di realizzazione</div>
+
+      <h1 class="title">
+        Associazione<br>
+        <em>Pro Loco</em><br>
+        Soverato
+      </h1>
+
+      <p class="subtitle">
+        Sito istituzionale dell'Associazione Pro Loco di Soverato.
+      </p>
+
+      <p class="description">
+        È in fase di realizzazione il nuovo portale ufficiale della Pro Loco di Soverato, dedicato alla promozione del territorio, alla valorizzazione delle tradizioni locali e all'informazione sulle attività dell'Associazione. Per comunicazioni e richieste è possibile utilizzare i recapiti riportati di seguito.
+      </p>
+
+      <!-- Divider onda -->
+      <div class="wave-divider" aria-hidden="true">
+        <svg viewBox="0 0 200 24" preserveAspectRatio="none">
+          <path d="M0,12 Q25,2 50,12 T100,12 T150,12 T200,12" stroke="currentColor" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+
+      <!-- Contatti -->
+      <div class="contacts">
+        <a href="https://maps.google.com/?q=Viale+Stazione+8,+Soverato,+88068" target="_blank" rel="noopener" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+              <circle cx="12" cy="10" r="3"/>
+            </svg>
+          </span>
+          Viale Stazione 8, Soverato (CZ), 88068
+        </a>
+
+        <a href="tel:+393882546631" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </span>
+          +39 388 254 6631
+        </a>
+
+        <a href="mailto:domiramo@gmail.com" class="contact-item">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </span>
+          domiramo@gmail.com
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="president">
+      <span class="president-label">Presidente</span>
+      <span class="president-name">Domenico Micò</span>
+      <span class="president-role">Pro Loco Soverato</span>
+    </div>
+
+    <div class="location">
+      <strong>Soverato</strong>
+      Provincia di Catanzaro · Calabria
+    </div>
+  </footer>
+
+</div>
+
+</body>
+</html>
